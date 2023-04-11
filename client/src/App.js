@@ -1,5 +1,5 @@
 import { Fragment, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/layout/Nav";
 import Landing from "./components/layout/Landing";
@@ -13,6 +13,7 @@ import PrivateRoute from "./components/routing/PrivateRoute";
 import { Provider } from "react-redux";
 import store from "./store";
 import { loadUser } from "./action/auth";
+import CreateProfile from "./components/profile-from/CreateProfile";
 
 function App() {
   useEffect(() => {
@@ -23,19 +24,19 @@ function App() {
       <Router>
         <Fragment>
           <NavBar />
-          <Route exact path="/" component={Landing} />
-          <section className="container">
             <Alert />
-            <Switch>
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/dashboard" component={Dashboard} />
-              {/* <Route
-                path="/dashboard"
-                element={<PrivateRoute component={Dashboard} />}
-              /> */}
-            </Switch>
-          </section>
+
+            <Routes>
+              <Route exact path="/" element={<Landing/>} />
+              <Route exact path="/register" element={<Register/>} />
+              <Route exact path="/login" element={<Login/>} />
+              
+              <Route path="/dashboard" element={<PrivateRoute component={Dashboard}/>}/>
+              <Route path="/create-profile" element={<PrivateRoute component={CreateProfile}/>}/>
+                
+
+              
+            </Routes>
         </Fragment>
       </Router>
     </Provider>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   AUTH_ERROR,
+  CLEAR_PROFILE,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   LOG_OUT,
@@ -99,6 +100,11 @@ export const login =
     }
   };
 
-export const logout = () => ({
-  type: LOG_OUT,
-});
+export const logout = () => (dispatch) => {
+  dispatch({
+    type: LOG_OUT,
+  })
+  dispatch({
+    type: CLEAR_PROFILE
+  })
+};
