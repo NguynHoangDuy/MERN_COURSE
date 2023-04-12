@@ -7,19 +7,25 @@ const Nav = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLink = (
     <ul>
       <li>
+        <Link to="/profiles">Developers</Link>
+      </li>
+      <li>
         <Link to="/dashboard">Dashboard</Link>
+      </li>
+      <li>
         <a onClick={logout} href="#!">
           <i className="fas fa-sign-out-alt"></i>
           <span className="hide-sm">Logout</span>
         </a>
       </li>
+      
     </ul>
   );
 
   const guestLink = (
     <ul>
       <li>
-        <Link to="/">Developers</Link>
+        <Link to="/profiles">Developers</Link>
       </li>
       <li>
         <Link to="/register">Register</Link>

@@ -1,4 +1,4 @@
-import { CLEAR_PROFILE, CREATE_PROFILE, EDIT_PROFILE, GET_PROFILE, PROFILE_ERR } from "../action/types";
+import { CLEAR_PROFILE, CREATE_PROFILE, EDIT_PROFILE, GET_PROFILE, GET_PROFILES, PROFILE_ERR } from "../action/types";
 
 const initialState = {
     profile: null,
@@ -19,20 +19,25 @@ const profileReducer = (state = initialState, action)=>{
                 profile: payload,
                 loading: false
             }
-            
-            case PROFILE_ERR:
-                return {
+        case GET_PROFILES:
+            return {
                 ...state,
-                err: payload,
+                profiles: payload,
                 loading: false
             }
-            case CLEAR_PROFILE:
-                return {
-                ...state,
-                repo: [],
-                profile: null,
-                loading: false
-            }
+        case PROFILE_ERR:
+            return {
+            ...state,
+            err: payload,
+            loading: false
+        }
+        case CLEAR_PROFILE:
+            return {
+            ...state,
+            repo: [],
+            profile: null,
+            loading: false
+        }
         default:
             return state
     }
