@@ -1,6 +1,8 @@
 const express = require("express")
 const router = express.Router()
 const auth = require("../../middleware/auth")
+const config = require('config');
+const axios = require("axios")
 const Profile = require("../../models/Profile")
 const {check, validationResult} = require("express-validator")
 const checkObjectId = require('../../middleware/checkObjectId');
@@ -240,14 +242,14 @@ router.get('/', async (req, res) => {
       );
       const headers = {
         'user-agent': 'node.js',
-        Authorization: `token ${config.get('githubToken')}`
+        
       };
   
       const gitHubResponse = await axios.get(uri, { headers });
       return res.json(gitHubResponse.data);
     } catch (err) {
       console.error(err.message);
-      return res.status(404).json({ msg: 'No Github profile found' });
+      return res.status(404).json({ msg: err.message });
     }
   });
 module.exports = router

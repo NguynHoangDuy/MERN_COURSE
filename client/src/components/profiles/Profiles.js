@@ -6,6 +6,7 @@ const Profiles = ({getAllProfiles, profiles}) => {
     const [profileList, setProfiles] = useState([])
     
     useEffect(()=>{
+
         if(profiles.length === 0) getAllProfiles()
         setProfiles(profiles)
     }, [profiles, getAllProfiles])

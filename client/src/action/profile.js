@@ -1,9 +1,12 @@
 import axios from "axios";
 import {
+  CLEAR_PROFILE,
   CREATE_PROFILE,
   EDIT_PROFILE,
   GET_PROFILE,
   GET_PROFILES,
+  GET_REPO,
+  NO_REPO,
   PROFILE_ERR,
 } from "./types";
 import { setAlert } from "./alert";
@@ -154,10 +157,29 @@ export const getProfileById = (id) => async(dispatch) => {
     
     const res = await axios.get(`http://localhost:5000/api/profile/user/${id.id}`)
     dispatch({
+      type: CLEAR_PROFILE
+    })
+    dispatch({
       type: GET_PROFILE,
       payload: res.data
     })
   } catch (error) {
     console.log(error)
+  }
+}
+
+export const getGithubRepo = (userName) => async(dispatch) => {
+  try {
+    const res = await axios.get(`http://localhost:5000/api/profile/github/${userName}`)
+
+    dispatch({
+      type: GET_REPO,
+      payload: res.data
+    })
+  } catch (error) {
+    dispatch({
+      type: NO_REPO,
+      payload: error
+    })
   }
 }
